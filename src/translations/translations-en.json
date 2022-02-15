@@ -1,4 +1,8 @@
 {
-  "title": "This is the title",
-  "description": "This is the description"
+  "menu.overview": "Overview",
+  "menu.tribal.pay": "Tribal Pay",
+  "menu.tribal.credit": "Tribal Credit",
+  "menu.payments": "Payments",
+  "menu.notifications": "Notifications",
+  "menu.users": "Users"
 }

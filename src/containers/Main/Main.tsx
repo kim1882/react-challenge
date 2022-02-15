@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import BusinessList from "../BusinessList";
 import PersonsList from "../PersonsList";
 import Sidebar from "../Sidebar";
@@ -11,6 +11,7 @@ const Main = () => {
       <Routes>
         <Route path="/" element={<BusinessList />} />
         <Route path="/business/:businessId" element={<PersonsList />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Container>
   );

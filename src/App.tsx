@@ -1,4 +1,5 @@
 import "./App.css";
+import "./fontello/css/fontello.css";
 import { GlobalStyle } from "./GlobalStyle.styled";
 import { BrowserRouter } from "react-router-dom";
 import Main from "./containers/Main";

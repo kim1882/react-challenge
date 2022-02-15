@@ -1,0 +1,12 @@
+
+.icon-emo-happy:before { content: '\e800'; } /* '' */
+.icon-chevron:before { content: '\e801'; } /* '' */
+.icon-action-edit:before { content: '\e801'; } /* '' */
+.icon-action-delete:before { content: '\e802'; } /* '' */
+.icon-calendar:before { content: '\e803'; } /* '' */
+.icon-menu-notifications:before { content: '\e804'; } /* '' */
+.icon-menu-overview:before { content: '\e805'; } /* '' */
+.icon-menu-payments:before { content: '\e806'; } /* '' */
+.icon-menu-tribal-credit:before { content: '\e807'; } /* '' */
+.icon-menu-tribal-pay:before { content: '\e808'; } /* '' */
+.icon-menu-users:before { content: '\e809'; } /* '' */

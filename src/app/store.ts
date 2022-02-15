@@ -1,5 +1,6 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import businessReducer from "../slices/business.slice";
+import profileReducer from "../slices/profile.slice";
 import rootSaga from "../sagas";
 import createSagaMiddleware from "redux-saga";
 
@@ -8,6 +9,7 @@ const sagaMiddleware = createSagaMiddleware();
 export const store = configureStore({
   reducer: {
     business: businessReducer,
+    profile: profileReducer,
   },
   middleware: [sagaMiddleware],
 });
