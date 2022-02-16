@@ -4,5 +4,11 @@
   "menu.tribal.credit": "Tribal Credit",
   "menu.payments": "Payments",
   "menu.notifications": "Notifications",
-  "menu.users": "Users"
+  "menu.users": "Users",
+  "business.list.title": "Business",
+  "business.list.create.button": "Create business",
+  "business.create.popup.title": "Create Business",
+  "business.create.popup.name.title": "Business Name",
+  "business.create.popup.confirm.button": "Create",
+  "popup.cancel": "Cancel"
 }

@@ -9,13 +9,14 @@ interface Person {
   join_date: Date;
 }
 
-interface Business {
+export interface IBusiness {
+  businessId: string;
   name: string;
   personsList: Person[];
 }
 
 interface IBusinessState {
-  businessList: Business[];
+  businessList: IBusiness[];
   status: "idle" | "loading" | "failed";
 }
 
@@ -28,12 +29,21 @@ const businessSlice = createSlice({
   name: "business",
   initialState,
   reducers: {
+    createBusiness: (state, action: PayloadAction<{ name: string }>) => {
+      state.status = "loading";
+    },
+    createBusinessSuccess: (state) => {
+      state.status = "idle";
+    },
+    createBusinessFailure: (state) => {
+      state.status = "failed";
+    },
     getBusinessList: (state) => {
       state.status = "loading";
     },
     getBusinessListSuccess: (
       state,
-      action: PayloadAction<{ businessList: Business[] }>
+      action: PayloadAction<{ businessList: IBusiness[] }>
     ) => {
       const { businessList } = action.payload;
       state.status = "idle";
@@ -46,6 +56,9 @@ const businessSlice = createSlice({
 });
 
 export const {
+  createBusiness,
+  createBusinessSuccess,
+  createBusinessFailure,
   getBusinessList,
   getBusinessListSuccess,
   getBusinessListFailure,

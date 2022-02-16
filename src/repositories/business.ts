@@ -1,10 +1,17 @@
-import axios from "axios";
+import { axiosInstance } from ".";
 
-const API_BASE = process.env.REACT_APP_API_URL;
+export const createBusiness = (name: string) => {
+  const url = "/business";
+  return axiosInstance({
+    method: "POST",
+    data: { name },
+    url,
+  });
+};
 
 export const getBusinessList = () => {
-  const url = `${API_BASE}/business`;
-  return axios({
+  const url = "/business";
+  return axiosInstance({
     method: "GET",
     url,
   });

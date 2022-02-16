@@ -1,8 +1,8 @@
 import { all } from "redux-saga/effects";
-import { watchGetBusinessList } from "./business";
+import { watchCreateBusiness, watchGetBusinessList } from "./business";
 
 function* rootSaga() {
-  yield all([watchGetBusinessList()]);
+  yield all([watchGetBusinessList(), watchCreateBusiness()]);
 }
 
 export default rootSaga;
