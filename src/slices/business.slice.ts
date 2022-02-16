@@ -12,7 +12,7 @@ interface Person {
 export interface IBusiness {
   businessId: string;
   name: string;
-  personsList: Person[];
+  personsList?: Person[];
 }
 
 interface IBusinessState {
@@ -52,6 +52,39 @@ const businessSlice = createSlice({
     getBusinessListFailure: (state) => {
       state.status = "failed";
     },
+    updateBusiness: (
+      state,
+      action: PayloadAction<{ id: string; name: string }>
+    ) => {
+      state.status = "loading";
+    },
+    updateBusinessSuccess: (
+      state,
+      action: PayloadAction<{ businessId: string; name: string }>
+    ) => {
+      state.status = "idle";
+      const { businessId, name } = action.payload;
+      let businessList = state.businessList;
+      businessList = businessList.map((item) => {
+        if (item.businessId === businessId) {
+          item.name = name;
+        }
+        return item;
+      });
+      state.businessList = businessList;
+    },
+    updateBusinessFailure: (state) => {
+      state.status = "failed";
+    },
+    deleteBusiness: (state, action: PayloadAction<{ id: string }>) => {
+      state.status = "loading";
+    },
+    deleteBusinessSuccess: (state) => {
+      state.status = "idle";
+    },
+    deleteBusinessFailure: (state) => {
+      state.status = "failed";
+    },
   },
 });
 
@@ -62,6 +95,12 @@ export const {
   getBusinessList,
   getBusinessListSuccess,
   getBusinessListFailure,
+  updateBusiness,
+  updateBusinessSuccess,
+  updateBusinessFailure,
+  deleteBusiness,
+  deleteBusinessSuccess,
+  deleteBusinessFailure,
 } = businessSlice.actions;
 
 export const selectBusinessList = (state: RootState) =>

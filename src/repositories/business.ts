@@ -16,3 +16,20 @@ export const getBusinessList = () => {
     url,
   });
 };
+
+export const updateBusiness = (id: string, name: string) => {
+  const url = `/business/${id}`;
+  return axiosInstance({
+    method: "PUT",
+    data: { name },
+    url,
+  });
+};
+
+export const deleteBusiness = (id: string) => {
+  const url = `/business/${id}`;
+  return axiosInstance({
+    method: "DELETE",
+    url,
+  });
+};

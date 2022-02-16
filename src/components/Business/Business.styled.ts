@@ -22,3 +22,10 @@ export const Actions = styled.div`
     cursor: pointer;
   }
 `;
+
+export const PopupTitle = styled.div`
+  font-weight: 700;
+  font-size: 1.8rem;
+  text-align: center;
+  margin-bottom: 2.4rem;
+`;

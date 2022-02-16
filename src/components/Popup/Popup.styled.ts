@@ -17,7 +17,7 @@ export const StyledPopup = styled(Popup)`
     text-align: left;
     width: 45.2rem;
     height: fit-content;
-    border-radius: 0.8rem;
+    border-radius: 2.9rem;
     padding: 3.5rem 4rem;
     z-index: 100;
   }
@@ -55,14 +55,18 @@ export const Button = styled.button`
   color: white;
   border: none;
   border-bottom: 0.1rem solid white;
+  font-weight: 600;
   font-size: 1.4rem;
   width: 9.4rem;
   height: 4.4rem;
-  padding: 1.2rem 2.4rem;
   border-radius: 10rem;
 
   &.close {
     background: #f8f8f8;
     color: black;
+  }
+  &.warning {
+    background: #ffd5d5;
+    color: #9a0000;
   }
 `;

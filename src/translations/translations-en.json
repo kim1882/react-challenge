@@ -10,5 +10,10 @@
   "business.create.popup.title": "Create Business",
   "business.create.popup.name.title": "Business Name",
   "business.create.popup.confirm.button": "Create",
+  "business.update.popup.title": "Edit Business",
+  "business.update.popup.name.title": "Business Name",
+  "business.update.popup.confirm.button": "Save",
+  "business.delete.popup.title": "Are you sure to delete {{ businessName }}?",
+  "business.delete.popup.confirm.button": "Remove",
   "popup.cancel": "Cancel"
 }
