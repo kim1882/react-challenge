@@ -30,3 +30,8 @@ export const menu = [
     route: "/users",
   },
 ];
+
+export enum ViewType {
+  grid,
+  list,
+}

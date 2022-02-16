@@ -8,16 +8,18 @@ export const Container = styled.div`
 export const Header = styled.div`
   display: flex;
   width: calc(100% - 7.9rem);
-  justify-content: space-between;
+  align-items: center;
   position: absolute;
   top: 17.5rem;
   left: 3.5rem;
 `;
 
 export const Title = styled.div`
+  flex-basis: 100%;
   font-weight: 700;
   font-size: 3rem;
   line-height: 4rem;
+  text-align: left;
 `;
 
 export const Button = styled.button`
@@ -50,6 +52,24 @@ export const List = styled.ul`
   & > div:not(:last-child) {
     border-bottom: 0.1rem solid #f1f1f1;
   }
+`;
+
+export const Grid = styled.div`
+  position: absolute;
+  top: 26.3rem;
+  left: 3.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 30.4rem);
+  gap: 2rem;
+  width: calc(100% - 7.9rem);
+  max-height: calc(100% - 30rem);
+  overflow: auto;
+`;
+
+export const View = styled.i`
+  font-size: 2.4rem;
+  cursor: pointer;
+  margin-right: 2.4rem;
 `;
 
 export const PopupTitle = styled.div`

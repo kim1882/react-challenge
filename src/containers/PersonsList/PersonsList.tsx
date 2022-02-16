@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Input from "../../components/Input";
 import Person from "../../components/Person";
 import Popup from "../../components/Popup";
+import { ViewType } from "../../config";
 import {
   createBusinessPerson,
   getBusinessPersonsList,
@@ -17,7 +18,9 @@ import {
   Title,
   Button,
   List,
+  Grid,
   PopupTitle,
+  View,
 } from "./PersonsList.styled";
 
 const CreateBusinessPerson = () => {
@@ -100,22 +103,38 @@ const PersonsList = () => {
   const dispatch = useDispatch();
   const { businessId = "" } = useParams();
   const business = useSelector(selectBusiness(businessId));
+  const [viewType, setViewType] = React.useState<ViewType>(ViewType.list);
 
   React.useEffect(() => {
     dispatch(getBusinessPersonsList({ businessId }));
   }, []);
 
+  const getItems = () =>
+    business?.personsList?.map((person) => (
+      <Person key={person.personId} viewType={viewType} person={person} />
+    ));
+
   return (
     <Container>
       <Header>
         <Title>{business?.name}</Title>
+        <View
+          className={
+            viewType === ViewType.list ? "icon-menu-overview" : "icon-view-list"
+          }
+          onClick={() =>
+            setViewType(
+              viewType === ViewType.list ? ViewType.grid : ViewType.list
+            )
+          }
+        />
         <CreateBusinessPerson />
       </Header>
-      <List>
-        {business?.personsList?.map((person) => (
-          <Person key={person.personId} person={person} />
-        ))}
-      </List>
+      {viewType === ViewType.list ? (
+        <List>{getItems()}</List>
+      ) : (
+        <Grid>{getItems()}</Grid>
+      )}
     </Container>
   );
 };

@@ -8,11 +8,13 @@ import {
 } from "../../slices/business.slice";
 import Input from "../Input";
 import Popup from "../Popup";
-import { Actions, Container, PopupTitle } from "./Person.styled";
+import { Actions, GridItem, ListItem, PopupTitle } from "./Person.styled";
 import { useParams } from "react-router-dom";
+import { ViewType } from "../../config";
 
 interface IPersonProps {
   person: IPerson;
+  viewType?: ViewType;
 }
 
 const UpdateBusinessPerson = ({ person }: IPersonProps) => {
@@ -111,9 +113,18 @@ const DeleteBusinessPerson = ({ person }: IPersonProps) => {
   );
 };
 
-const Person = ({ person }: IPersonProps) => {
-  return (
-    <Container>
+const Person = ({ person, viewType }: IPersonProps) => {
+  const phoneMask = (value: string) => {
+    let phoneValue = value.replace(/\D/g, "");
+    phoneValue = `(${phoneValue.substring(0, 3)}) ${phoneValue.substring(
+      3,
+      6
+    )}-${phoneValue.substring(6, 10)}`;
+    return phoneValue;
+  };
+
+  return viewType === ViewType.list ? (
+    <ListItem>
       <div className="personDetails">
         <span className="name">{person.name}</span>
         <span className="role">{person.role}</span>
@@ -122,7 +133,19 @@ const Person = ({ person }: IPersonProps) => {
         <UpdateBusinessPerson person={person} />
         <DeleteBusinessPerson person={person} />
       </Actions>
-    </Container>
+    </ListItem>
+  ) : (
+    <GridItem>
+      <span className="name">{person.name}</span>
+      <span className="role">{person.role}</span>
+      <Actions className="actions">
+        <UpdateBusinessPerson person={person} />
+        <DeleteBusinessPerson person={person} />
+      </Actions>
+      <div className="separator" />
+      <span className="phone">{phoneMask(person.phone)}</span>
+      <span className="email">{person.email}</span>
+    </GridItem>
   );
 };
 
