@@ -4,6 +4,10 @@ import {
   getBusinessList as getBusinessListService,
   updateBusiness as updateBusinessService,
   deleteBusiness as deleteBusinessService,
+  createBusinessPerson as createBusinessPersonService,
+  getBusinessPersonsList as getBusinessPersonsListService,
+  updateBusinessPerson as updateBusinessPersonService,
+  deleteBusinessPerson as deleteBusinessPersonService,
 } from "../repositories/business";
 import {
   createBusiness,
@@ -18,6 +22,18 @@ import {
   deleteBusiness,
   deleteBusinessSuccess,
   deleteBusinessFailure,
+  createBusinessPerson,
+  createBusinessPersonSuccess,
+  createBusinessPersonFailure,
+  getBusinessPersonsList,
+  getBusinessPersonsListSuccess,
+  getBusinessPersonsListFailure,
+  updateBusinessPerson,
+  updateBusinessPersonSuccess,
+  updateBusinessPersonFailure,
+  deleteBusinessPerson,
+  deleteBusinessPersonSuccess,
+  deleteBusinessPersonFailure,
 } from "../slices/business.slice";
 
 export function* createBusinessFn({
@@ -87,6 +103,92 @@ export function* deleteBusinessFn({
   }
 }
 
+export function* createBusinessPersonFn({
+  payload,
+}: ReturnType<typeof createBusinessPerson>) {
+  try {
+    const { businessId, person } = payload;
+    const { data } = yield call(
+      createBusinessPersonService,
+      businessId,
+      person
+    );
+    if (data) {
+      yield put(getBusinessPersonsList({ businessId }));
+      yield put(createBusinessPersonSuccess());
+    } else {
+      yield put(createBusinessPersonFailure());
+    }
+  } catch (e) {
+    yield put(createBusinessPersonFailure());
+  }
+}
+
+export function* getBusinessPersonsListFn({
+  payload,
+}: ReturnType<typeof getBusinessPersonsList>) {
+  try {
+    const { businessId } = payload;
+    const { data } = yield call(getBusinessPersonsListService, businessId);
+    if (data) {
+      const { persons: personsList } = data;
+      yield put(getBusinessPersonsListSuccess({ businessId, personsList }));
+    } else {
+      yield put(getBusinessPersonsListFailure());
+    }
+  } catch (e) {
+    yield put(getBusinessPersonsListFailure());
+  }
+}
+
+export function* updateBusinessPersonFn({
+  payload,
+}: ReturnType<typeof updateBusinessPerson>) {
+  try {
+    const { businessId, personId, person } = payload;
+    const { data: personResult } = yield call(
+      updateBusinessPersonService,
+      businessId,
+      personId,
+      person
+    );
+    if (personResult) {
+      yield put(
+        updateBusinessPersonSuccess({
+          businessId,
+          personId,
+          person: personResult,
+        })
+      );
+    } else {
+      yield put(updateBusinessPersonFailure());
+    }
+  } catch (e) {
+    yield put(updateBusinessPersonFailure());
+  }
+}
+
+export function* deleteBusinessPersonFn({
+  payload,
+}: ReturnType<typeof deleteBusinessPerson>) {
+  try {
+    const { businessId, personId } = payload;
+    const { data } = yield call(
+      deleteBusinessPersonService,
+      businessId,
+      personId
+    );
+    if (data) {
+      yield put(getBusinessPersonsList({ businessId }));
+      yield put(deleteBusinessPersonSuccess());
+    } else {
+      yield put(deleteBusinessPersonFailure());
+    }
+  } catch (e) {
+    yield put(deleteBusinessPersonFailure());
+  }
+}
+
 export function* watchCreateBusiness() {
   yield takeEvery(createBusiness, createBusinessFn);
 }
@@ -98,4 +200,17 @@ export function* watchUpdateBusiness() {
 }
 export function* watchDeleteBusiness() {
   yield takeEvery(deleteBusiness, deleteBusinessFn);
+}
+
+export function* watchCreateBusinessPerson() {
+  yield takeEvery(createBusinessPerson, createBusinessPersonFn);
+}
+export function* watchGetBusinessPersonsList() {
+  yield takeEvery(getBusinessPersonsList, getBusinessPersonsListFn);
+}
+export function* watchUpdateBusinessPerson() {
+  yield takeEvery(updateBusinessPerson, updateBusinessPersonFn);
+}
+export function* watchDeleteBusinessPerson() {
+  yield takeEvery(deleteBusinessPerson, deleteBusinessPersonFn);
 }

@@ -69,7 +69,6 @@ const BusinessList = () => {
             key={business.businessId}
             businessId={business.businessId}
             name={business.name}
-            personsList={business.personsList}
           />
         ))}
       </List>

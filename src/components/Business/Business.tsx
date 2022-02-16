@@ -9,6 +9,7 @@ import {
 import Input from "../Input";
 import Popup from "../Popup";
 import { Actions, Container, PopupTitle } from "./Business.styled";
+import { NavLink } from "react-router-dom";
 
 const UpdateBusiness = ({ businessId: id, name }: IBusiness) => {
   const { t: translation } = useTranslation();
@@ -64,7 +65,9 @@ const DeleteBusiness = ({ businessId: id, name }: IBusiness) => {
 const Business = ({ businessId, name }: IBusiness) => {
   return (
     <Container>
-      <span>{name}</span>
+      <NavLink to={`/business/${businessId}`} className="name">
+        {name}
+      </NavLink>
       <Actions>
         <UpdateBusiness businessId={businessId} name={name} />
         <DeleteBusiness businessId={businessId} name={name} />

@@ -1,15 +1,30 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const fieldStyle = css`
+  flex-basis: 100%;
+  color: black;
+
+  font-size: 1.6rem;
+  line-height: 2.2rem;
+  text-align: left;
+`;
 
 export const Container = styled.div`
   height: 6rem;
   display: flex;
-  justify-content: space-between;
+
+  .personDetails {
+    display: flex;
+    flex-basis: 100%;
+  }
 
   .name {
-    color: black;
+    ${fieldStyle}
     font-weight: 600;
-    font-size: 1.6rem;
-    line-height: 2.2rem;
+  }
+  .role {
+    ${fieldStyle}
+    font-weight: 400;
   }
 `;
 

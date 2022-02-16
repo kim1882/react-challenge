@@ -1,7 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../app/store";
 
-interface Person {
+export interface IPerson {
+  personId?: string;
   name: string;
   email: string;
   phone: string;
@@ -12,7 +13,7 @@ interface Person {
 export interface IBusiness {
   businessId: string;
   name: string;
-  personsList?: Person[];
+  personsList?: IPerson[];
 }
 
 interface IBusinessState {
@@ -85,6 +86,93 @@ const businessSlice = createSlice({
     deleteBusinessFailure: (state) => {
       state.status = "failed";
     },
+    createBusinessPerson: (
+      state,
+      action: PayloadAction<{ businessId: string; person: IPerson }>
+    ) => {
+      state.status = "loading";
+    },
+    createBusinessPersonSuccess: (state) => {
+      state.status = "idle";
+    },
+    createBusinessPersonFailure: (state) => {
+      state.status = "failed";
+    },
+    getBusinessPersonsList: (
+      state,
+      action: PayloadAction<{ businessId: string }>
+    ) => {
+      state.status = "loading";
+    },
+    getBusinessPersonsListSuccess: (
+      state,
+      action: PayloadAction<{ businessId: string; personsList: IPerson[] }>
+    ) => {
+      state.status = "idle";
+      const { businessId, personsList } = action.payload;
+      let businessList = state.businessList;
+      businessList = businessList.map((item) => {
+        if (item.businessId === businessId) {
+          item.personsList = personsList;
+        }
+        return item;
+      });
+      state.businessList = businessList;
+    },
+    getBusinessPersonsListFailure: (state) => {
+      state.status = "failed";
+    },
+    updateBusinessPerson: (
+      state,
+      action: PayloadAction<{
+        businessId: string;
+        personId: string;
+        person: IPerson;
+      }>
+    ) => {
+      state.status = "loading";
+    },
+    updateBusinessPersonSuccess: (
+      state,
+      action: PayloadAction<{
+        businessId: string;
+        personId: string;
+        person: IPerson;
+      }>
+    ) => {
+      state.status = "idle";
+      const { businessId, personId, person } = action.payload;
+      let businessList = state.businessList;
+      businessList = businessList.map((item) => {
+        if (item.businessId === businessId) {
+          let personsList = item.personsList;
+          personsList = personsList?.map((elem) => {
+            if (elem.personId === personId) {
+              return { ...elem, ...person };
+            }
+            return elem;
+          });
+          item.personsList = personsList;
+        }
+        return item;
+      });
+      state.businessList = businessList;
+    },
+    updateBusinessPersonFailure: (state) => {
+      state.status = "failed";
+    },
+    deleteBusinessPerson: (
+      state,
+      action: PayloadAction<{ businessId: string; personId: string }>
+    ) => {
+      state.status = "loading";
+    },
+    deleteBusinessPersonSuccess: (state) => {
+      state.status = "idle";
+    },
+    deleteBusinessPersonFailure: (state) => {
+      state.status = "failed";
+    },
   },
 });
 
@@ -101,9 +189,24 @@ export const {
   deleteBusiness,
   deleteBusinessSuccess,
   deleteBusinessFailure,
+  createBusinessPerson,
+  createBusinessPersonSuccess,
+  createBusinessPersonFailure,
+  getBusinessPersonsList,
+  getBusinessPersonsListSuccess,
+  getBusinessPersonsListFailure,
+  updateBusinessPerson,
+  updateBusinessPersonSuccess,
+  updateBusinessPersonFailure,
+  deleteBusinessPerson,
+  deleteBusinessPersonSuccess,
+  deleteBusinessPersonFailure,
 } = businessSlice.actions;
 
 export const selectBusinessList = (state: RootState) =>
   state.business.businessList;
+
+export const selectBusiness = (businessId: string) => (state: RootState) =>
+  state.business.businessList.find((item) => item.businessId === businessId);
 
 export default businessSlice.reducer;
