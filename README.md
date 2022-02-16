@@ -1,3 +1,11 @@
+# React Challenge
+
+Setup:
+
+Please create an .env at the root of the project with the following keys:
+REACT_APP_API_URL=http://localhost:3000
+REACT_APP_API_KEY=<API KEY VALUE>
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) template.
 
 ## Available Scripts
