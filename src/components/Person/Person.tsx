@@ -33,6 +33,7 @@ const UpdateBusinessPerson = ({ person }: IPersonProps) => {
     {
       label: "business.person.update.popup.email.title",
       attribute: "email",
+      type: "email",
     },
     {
       label: "business.person.update.popup.phone.title",

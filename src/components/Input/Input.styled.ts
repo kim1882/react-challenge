@@ -10,6 +10,7 @@ export const Label = styled.label`
   font-size: 1.4rem;
   line-height: 2rem;
   color: #6b6e74;
+  margin-top: 2rem;
   margin-bottom: 0.8rem;
 `;
 

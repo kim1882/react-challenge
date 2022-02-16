@@ -40,11 +40,21 @@ export const List = styled.ul`
   width: calc(100% - 7.9rem);
   height: calc(100% - 30rem);
   overflow: auto;
+
+  & > div {
+    padding-bottom: 2.4rem;
+  }
+  & > div:not(:first-child) {
+    padding-top: 2.4rem;
+  }
+  & > div:not(:last-child) {
+    border-bottom: 0.1rem solid #f1f1f1;
+  }
 `;
 
 export const PopupTitle = styled.div`
   font-weight: 700;
   font-size: 1.8rem;
   text-align: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 0.4rem;
 `;

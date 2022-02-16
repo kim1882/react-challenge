@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 6rem;
   display: flex;
   justify-content: space-between;
 
@@ -28,5 +27,5 @@ export const PopupTitle = styled.div`
   font-weight: 700;
   font-size: 1.8rem;
   text-align: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 0.4rem;
 `;

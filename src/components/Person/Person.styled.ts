@@ -10,7 +10,6 @@ const fieldStyle = css`
 `;
 
 export const Container = styled.div`
-  height: 6rem;
   display: flex;
 
   .personDetails {
@@ -43,5 +42,5 @@ export const PopupTitle = styled.div`
   font-weight: 700;
   font-size: 1.8rem;
   text-align: center;
-  margin-bottom: 2.4rem;
+  margin-bottom: 0.4rem;
 `;
